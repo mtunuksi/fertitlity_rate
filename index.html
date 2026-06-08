@@ -1,150 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fertility Rate in the World</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>World Unemployment Rates</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f7f7f7;
-      color: #222;
-      line-height: 1.6;
-    }
-
-    header {
-      background: #1f4f46;
-      color: white;
-      padding: 50px 20px;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 36px;
-    }
-
-    header p {
-      max-width: 700px;
-      margin: 15px auto 0;
-      font-size: 18px;
-    }
-
-    main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    section {
-      background: white;
-      padding: 25px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    h2 {
-      color: #1f4f46;
-      margin-top: 0;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
-
-    .card {
-      background: #eef5f3;
-      padding: 20px;
-      border-radius: 8px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      background: #222;
-      color: white;
-      margin-top: 40px;
-    }
+    :root { --bg: #f7f7f2; --ink: #1f2933; --muted:#667085; --card:#ffffff; --line:#e5e7eb; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.55; }
+    header { padding: 64px 20px 36px; text-align: center; background: #ffffff; border-bottom: 1px solid var(--line); }
+    h1 { margin: 0 0 12px; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.04em; }
+    .subtitle { max-width: 680px; margin: 0 auto; color: var(--muted); font-size: 1.1rem; }
+    main { max-width: 980px; margin: 0 auto; padding: 28px 20px 56px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin: 24px 0; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: 0 8px 24px rgba(16,24,40,.04); }
+    .label { color: var(--muted); font-size: .9rem; }
+    .number { font-size: 2.4rem; font-weight: 800; margin: 8px 0 2px; letter-spacing: -0.04em; }
+    section { margin-top: 28px; }
+    h2 { font-size: 1.35rem; margin-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+    th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; }
+    th { background: #fafafa; color: var(--muted); font-size: .9rem; }
+    tr:last-child td { border-bottom: 0; }
+    footer { color: var(--muted); font-size: .9rem; padding-top: 24px; }
+    a { color: inherit; }
   </style>
 </head>
-
 <body>
-
   <header>
-    <h1>Fertility Rate in the World</h1>
-    <p>
-      Fertility rate is the average number of children a woman is expected to have
-      during her lifetime. Around the world, fertility rates have been falling due
-      to education, urbanization, healthcare, and economic change.
-    </p>
+    <h1>World Unemployment Rates</h1>
+    <p class="subtitle">A simple snapshot of unemployment around the world using modeled International Labour Organization estimates via the World Bank.</p>
   </header>
 
   <main>
-    <section>
-      <h2>What Is Fertility Rate?</h2>
-      <p>
-        Fertility rate measures how many children women have on average. A rate of
-        about 2.1 children per woman is called the replacement level. This is the
-        level needed to keep a population stable without migration.
-      </p>
-    </section>
+    <div class="grid">
+      <article class="card">
+        <div class="label">World unemployment rate</div>
+        <div class="number">4.8%</div>
+        <div class="label">2025 modeled estimate</div>
+      </article>
+      <article class="card">
+        <div class="label">Highest sample shown</div>
+        <div class="number">24.5%</div>
+        <div class="label">Botswana, 2025</div>
+      </article>
+      <article class="card">
+        <div class="label">Lowest sample shown</div>
+        <div class="number">0.3%</div>
+        <div class="label">Cambodia, 2025</div>
+      </article>
+    </div>
 
     <section>
-      <h2>Global Trend</h2>
-      <p>
-        Many countries now have fertility rates below replacement level. This means
-        their populations may age and eventually shrink. Other countries, especially
-        in parts of Africa, still have higher fertility rates and younger populations.
-      </p>
+      <h2>Selected countries</h2>
+      <table aria-label="Selected unemployment rates by country">
+        <thead>
+          <tr><th>Country</th><th>Unemployment rate</th><th>Year</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Australia</td><td>4.1%</td><td>2025</td></tr>
+          <tr><td>Brazil</td><td>6.0%</td><td>2025</td></tr>
+          <tr><td>Canada</td><td>6.9%</td><td>2025</td></tr>
+          <tr><td>China</td><td>4.6%</td><td>2025</td></tr>
+          <tr><td>Germany</td><td>3.4%</td><td>2025</td></tr>
+          <tr><td>Japan</td><td>2.6%</td><td>2025</td></tr>
+          <tr><td>Kenya</td><td>5.7%</td><td>2025</td></tr>
+          <tr><td>South Africa</td><td>31.0%</td><td>2025</td></tr>
+          <tr><td>United Kingdom</td><td>4.5%</td><td>2025</td></tr>
+          <tr><td>United States</td><td>4.2%</td><td>2025</td></tr>
+        </tbody>
+      </table>
     </section>
 
-    <section>
-      <h2>Why Fertility Rates Are Falling</h2>
-      <div class="cards">
-        <div class="card">
-          <h3>Education</h3>
-          <p>More years in school often lead people to have children later in life.</p>
-        </div>
-
-        <div class="card">
-          <h3>Urbanization</h3>
-          <p>City life is usually more expensive, making large families less common.</p>
-        </div>
-
-        <div class="card">
-          <h3>Healthcare</h3>
-          <p>Better healthcare and family planning give families more control.</p>
-        </div>
-
-        <div class="card">
-          <h3>Economy</h3>
-          <p>Housing, jobs, and childcare costs influence family size decisions.</p>
-        </div>
-      </div>
+    <section class="card">
+      <h2>What does unemployment rate mean?</h2>
+      <p>The unemployment rate is the percentage of the labor force that is without work, available for work, and seeking employment.</p>
     </section>
 
-    <section>
-      <h2>Why It Matters</h2>
-      <p>
-        Fertility rates affect schools, jobs, healthcare systems, pensions, and the
-        future size of populations. Understanding fertility trends helps governments
-        and communities plan for the future.
-      </p>
-    </section>
+    <footer>
+      Data source: World Bank indicator “Unemployment, total (% of total labor force) (modeled ILO estimate)”. Values are a simple public-data snapshot and may change as datasets are revised.
+    </footer>
   </main>
-
-  <footer>
-    <p>Simple Fertility Rate Website</p>
-  </footer>
-
-  <!-- Botpress Chatbot -->
-  <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2026/06/08/17/20260608170936-VUHVL0KU.js" defer></script>
-
 </body>
 </html>
