@@ -1,870 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/06/08/17/20260608170936-VUHVL0KU.js" defer></script>
-    
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fertility Trends — Brazil, India & China</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fertility Rate in the World</title>
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:       #0a0a0a;
-      --surface:  #111111;
-      --border:   #1e1e1e;
-      --text:     #e8e2d9;
-      --muted:    #5a5550;
-      --accent:   #d4a847;
-      --accent2:  #7eb8a4;
-      --accent3:  #c06060;
-    }
-
-    html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Syne', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* ── GRAIN OVERLAY ── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.4rem 5vw;
-      background: rgba(10,10,10,0.9);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .logo em { color: var(--accent); font-style: italic; }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 10rem 5vw 6rem;
-      gap: 4rem;
-      position: relative;
-    }
-
-    /* vertical rule */
-    .hero::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 15%;
-      bottom: 15%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--border), transparent);
-    }
-
-    .hero-left { padding-right: 4rem; }
-
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero-eyebrow span {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .eyebrow-line {
-      width: 40px;
-      height: 1px;
-      background: var(--accent);
-    }
-
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.5rem, 6vw, 6rem);
-      font-weight: 300;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      margin-bottom: 2rem;
-    }
-
-    .hero h1 strong {
-      font-weight: 600;
-      display: block;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-desc {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 420px;
-      margin-bottom: 3rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.8rem;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
-
-    .btn-gold {
-      background: var(--accent);
-      color: #0a0a0a;
-      border: 1px solid var(--accent);
-    }
-
-    .btn-gold:hover {
-      background: transparent;
-      color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--text);
-      transform: translateY(-2px);
-    }
-
-    /* hero right: stats stack */
-    .hero-right {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .stat-row {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 1.5rem;
-      padding: 2rem 0;
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
-      transform: translateX(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .stat-row:first-child { border-top: 1px solid var(--border); }
-    .stat-row.visible { opacity: 1; transform: none; }
-
-    .stat-flag { font-size: 2rem; }
-
-    .stat-info { }
-    .stat-info .country {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.3rem;
-    }
-    .stat-info .label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-weight: 300;
-      color: var(--text);
-    }
-
-    .stat-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 600;
-      line-height: 1;
-      text-align: right;
-    }
-
-    .stat-row:nth-child(1) .stat-number { color: var(--accent); }
-    .stat-row:nth-child(2) .stat-number { color: var(--accent2); }
-    .stat-row:nth-child(3) .stat-number { color: var(--accent3); }
-
-    /* bar underneath number */
-    .stat-bar-wrap {
-      grid-column: 1 / -1;
-      height: 2px;
-      background: var(--border);
-      border-radius: 1px;
-      margin-top: -1rem;
-      overflow: hidden;
-    }
-
-    .stat-bar {
-      height: 100%;
-      border-radius: 1px;
-      width: 0;
-      transition: width 1.2s ease;
-    }
-
-    .stat-row.visible .stat-bar { }
-    .stat-row:nth-child(1) .stat-bar { background: var(--accent); }
-    .stat-row:nth-child(2) .stat-bar { background: var(--accent2); }
-    .stat-row:nth-child(3) .stat-bar { background: var(--accent3); }
-
-    /* ── SECTION BASE ── */
-    .section {
-      padding: 8rem 5vw;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 4rem;
-      margin-bottom: 5rem;
-    }
-
-    .section-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      font-weight: 300;
-      color: var(--border);
-      line-height: 1;
-      flex-shrink: 0;
-      margin-top: -0.5rem;
-    }
-
-    .section-head-text {}
-
-    .section-tag {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 300;
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      margin-bottom: 1rem;
-    }
-
-    .section-title strong { font-weight: 600; }
-
-    .section-body {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 300;
-      line-height: 1.9;
-      color: var(--muted);
-      max-width: 520px;
-    }
-
-    /* ── FULL-WIDTH DIVIDER ── */
-    .full-divider {
-      border: none;
-      border-top: 1px solid var(--border);
+      font-family: Arial, sans-serif;
       margin: 0;
+      background: #f7f7f7;
+      color: #222;
+      line-height: 1.6;
     }
 
-    /* ── COUNTRY CARDS ── */
-    .country-grid {
+    header {
+      background: #1f4f46;
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    header p {
+      max-width: 700px;
+      margin: 15px auto 0;
+      font-size: 18px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      background: white;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #1f4f46;
+      margin-top: 0;
+    }
+
+    .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
     }
 
-    .country-card {
-      background: var(--surface);
-      padding: 3rem 2.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s;
+    .card {
+      background: #eef5f3;
+      padding: 20px;
+      border-radius: 8px;
     }
 
-    .country-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-    }
-
-    .country-card:nth-child(1)::before { background: var(--accent); }
-    .country-card:nth-child(2)::before { background: var(--accent2); }
-    .country-card:nth-child(3)::before { background: var(--accent3); }
-
-    .country-card:hover { background: #161616; }
-
-    .card-flag { font-size: 2.5rem; margin-bottom: 1.5rem; }
-
-    .card-country {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .card-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 1.2rem;
-      line-height: 1.2;
-    }
-
-    .card-body {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
-
-    .card-stat {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-    }
-
-    .card-stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 600;
-      line-height: 1;
-    }
-
-    .country-card:nth-child(1) .card-stat-num { color: var(--accent); }
-    .country-card:nth-child(2) .card-stat-num { color: var(--accent2); }
-    .country-card:nth-child(3) .card-stat-num { color: var(--accent3); }
-
-    .card-stat-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── TIMELINE ── */
-    .timeline {
-      position: relative;
-      padding-left: 3rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.5rem;
-      bottom: 0.5rem;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--accent), var(--border));
-    }
-
-    .timeline-item {
-      position: relative;
-      padding: 0 0 3.5rem 3rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .timeline-item.visible { opacity: 1; transform: none; }
-
-    .timeline-dot {
-      position: absolute;
-      left: -3rem;
-      top: 0.4rem;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      margin-left: -3.5px;
-    }
-
-    .timeline-year {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .timeline-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-
-    .timeline-body {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 560px;
-    }
-
-    /* ── DATA SOURCE ── */
-    .source-band {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 4rem 5vw;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-
-    .source-left { }
-    .source-tag {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.6rem;
-    }
-
-    .source-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 600;
-    }
-
-    .source-desc {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 500px;
-    }
-
-    .source-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-      white-space: nowrap;
-    }
-
-    .source-link:hover { border-color: var(--accent); }
-
-    /* ── FOOTER ── */
     footer {
-      padding: 3rem 5vw;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-
-    .footer-logo em { color: var(--accent); font-style: italic; }
-
-    footer p {
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; padding-top: 8rem; }
-      .hero::before { display: none; }
-      .hero-left { padding-right: 0; }
-      .country-grid { grid-template-columns: 1fr; }
-      .section-header { flex-direction: column; gap: 1rem; }
-      .section-num { font-size: 3rem; }
-      nav { padding: 1rem 5vw; }
-      .nav-links { gap: 1.5rem; }
-    }
-
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .hero h1 { font-size: 3rem; }
+      text-align: center;
+      padding: 25px;
+      background: #222;
+      color: white;
+      margin-top: 40px;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="logo">Fertility <em>Trends</em></a>
-    <ul class="nav-links">
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#countries">Countries</a></li>
-      <li><a href="#history">History</a></li>
-      <li><a href="#data">Data</a></li>
-    </ul>
-  </nav>
+  <header>
+    <h1>Fertility Rate in the World</h1>
+    <p>
+      Fertility rate is the average number of children a woman is expected to have
+      during her lifetime. Around the world, fertility rates have been falling due
+      to education, urbanization, healthcare, and economic change.
+    </p>
+  </header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-left">
-      <div class="hero-eyebrow">
-        <div class="eyebrow-line"></div>
-        <span>Global Demography — 2025</span>
-      </div>
-      <h1>
-        The Falling<br/>
-        <strong>Birth Rate</strong><br/>
-        <em>Crisis</em>
-      </h1>
-      <p class="hero-desc">
-        Three of the world's most populous nations — Brazil, India, and China —
-        have undergone dramatic demographic transformations over the past seven decades.
-        This is their story in data.
+  <main>
+    <section>
+      <h2>What Is Fertility Rate?</h2>
+      <p>
+        Fertility rate measures how many children women have on average. A rate of
+        about 2.1 children per woman is called the replacement level. This is the
+        level needed to keep a population stable without migration.
       </p>
-      <div class="hero-actions">
-        <a href="#countries" class="btn btn-gold">Explore Countries</a>
-        <a href="#data" class="btn btn-ghost">View Data Source</a>
-      </div>
-    </div>
+    </section>
 
-    <div class="hero-right">
-      <div class="stat-row">
-        <div class="stat-flag">🇧🇷</div>
-        <div class="stat-info">
-          <div class="country">Brazil</div>
-          <div class="label">Fertility Rate, 2023</div>
-        </div>
-        <div class="stat-number">1.6</div>
-        <div class="stat-bar-wrap">
-          <div class="stat-bar" data-width="27"></div>
-        </div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-flag">🇮🇳</div>
-        <div class="stat-info">
-          <div class="country">India</div>
-          <div class="label">Fertility Rate, 2023</div>
-        </div>
-        <div class="stat-number">2.0</div>
-        <div class="stat-bar-wrap">
-          <div class="stat-bar" data-width="33"></div>
-        </div>
-      </div>
-      <div class="stat-row">
-        <div class="stat-flag">🇨🇳</div>
-        <div class="stat-info">
-          <div class="country">China</div>
-          <div class="label">Fertility Rate, 2023</div>
-        </div>
-        <div class="stat-number">1.0</div>
-        <div class="stat-bar-wrap">
-          <div class="stat-bar" data-width="17"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="full-divider"/>
-
-  <!-- OVERVIEW SECTION -->
-  <div class="section" id="overview">
-    <div class="section-header reveal">
-      <div class="section-num">01</div>
-      <div class="section-head-text">
-        <div class="section-tag">Overview</div>
-        <h2 class="section-title">A world below <strong>replacement level</strong></h2>
-        <p class="section-body">
-          The replacement fertility rate — the level needed to maintain a stable population
-          without migration — is approximately 2.1 children per woman. All three nations
-          covered here have fallen at or below this threshold, signalling a profound
-          shift in global demographics with far-reaching economic and social consequences.
-        </p>
-      </div>
-    </div>
-
-    <div class="country-grid reveal">
-      <div class="country-card">
-        <div class="card-flag">🇧🇷</div>
-        <div class="card-country">Brazil</div>
-        <div class="card-title">From 6.2 to 1.6 in sixty years</div>
-        <p class="card-body">
-          Brazil achieved one of Latin America's fastest demographic transitions,
-          driven by urbanisation, women entering the workforce, and broad access
-          to family planning across its vast territory.
-        </p>
-        <div class="card-stat">
-          <span class="card-stat-num">1.6</span>
-          <span class="card-stat-label">births per<br/>woman (2023)</span>
-        </div>
-      </div>
-      <div class="country-card">
-        <div class="card-flag">🇮🇳</div>
-        <div class="card-country">India</div>
-        <div class="card-title">Crossing the replacement threshold</div>
-        <p class="card-body">
-          India's fertility rate has fallen below 2.1 for the first time, a milestone
-          once thought decades away. Regional disparities remain stark — southern
-          states lead the decline while northern states lag behind.
-        </p>
-        <div class="card-stat">
-          <span class="card-stat-num">2.0</span>
-          <span class="card-stat-label">births per<br/>woman (2023)</span>
-        </div>
-      </div>
-      <div class="country-card">
-        <div class="card-flag">🇨🇳</div>
-        <div class="card-country">China</div>
-        <div class="card-title">The One-Child Policy's long shadow</div>
-        <p class="card-body">
-          China's rate is now among the lowest on the planet, a direct consequence
-          of the One-Child Policy enforced from 1980 to 2015 and structural
-          economic pressures that persist even after its abolition.
-        </p>
-        <div class="card-stat">
-          <span class="card-stat-num">1.0</span>
-          <span class="card-stat-label">births per<br/>woman (2023)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="full-divider"/>
-
-  <!-- HISTORY SECTION -->
-  <div class="section" id="history">
-    <div class="section-header reveal">
-      <div class="section-num">02</div>
-      <div class="section-head-text">
-        <div class="section-tag">Historical Context</div>
-        <h2 class="section-title">Key moments in <strong>demographic change</strong></h2>
-        <p class="section-body">
-          The decline in fertility rates across Brazil, India, and China was not gradual —
-          it was shaped by deliberate policy decisions, economic shocks,
-          and cultural transformations that unfolded over decades.
-        </p>
-      </div>
-    </div>
-
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">1960s</div>
-        <div class="timeline-title">Peak fertility across all three nations</div>
-        <p class="timeline-body">
-          Brazil, India, and China all recorded fertility rates above 5.5 children
-          per woman during this decade. Post-war population growth was seen as
-          a sign of national vitality in many developing economies.
-        </p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">1975 — Brazil</div>
-        <div class="timeline-title">Urbanisation accelerates the transition</div>
-        <p class="timeline-body">
-          Brazil's rapid urbanisation through the 1970s fundamentally changed
-          family structures. City living reduced the economic value of large
-          families, and access to contraception expanded significantly.
-        </p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">1980 — China</div>
-        <div class="timeline-title">The One-Child Policy is enacted</div>
-        <p class="timeline-body">
-          China's government introduced strict birth limits as part of its
-          modernisation programme. Families were restricted to one child in urban
-          areas, enforced through fines, loss of benefits, and in some cases coercion.
-        </p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">1990s — India</div>
-        <div class="timeline-title">Economic liberalisation changes the landscape</div>
-        <p class="timeline-body">
-          India's 1991 economic reforms opened the country to global markets,
-          accelerating urbanisation and dramatically improving female literacy rates —
-          two of the strongest predictors of fertility decline.
-        </p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2015 — China</div>
-        <div class="timeline-title">The One-Child Policy is abolished</div>
-        <p class="timeline-body">
-          Facing a rapidly ageing population and shrinking workforce, China
-          abolished the One-Child Policy in 2015 and later introduced a
-          three-child policy in 2021. Fertility rates have not recovered.
-        </p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">2023 — All Three</div>
-        <div class="timeline-title">All three nations below replacement level</div>
-        <p class="timeline-body">
-          For the first time in recorded history, Brazil, India, and China
-          simultaneously record fertility rates at or below the replacement
-          threshold of 2.1 — a landmark moment in global demographic history.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- DATA SOURCE BAND -->
-  <div class="source-band" id="data">
-    <div class="source-left reveal">
-      <div class="source-tag">Data Source</div>
-      <div class="source-name">Our World in Data</div>
-      <p class="source-desc">
-        All fertility statistics on this site are sourced from Our World in Data,
-        a project of the Global Change Data Lab — a registered UK non-profit
-        (Charity No. 1186433) dedicated to advancing education through open,
-        publicly available global data.
+    <section>
+      <h2>Global Trend</h2>
+      <p>
+        Many countries now have fertility rates below replacement level. This means
+        their populations may age and eventually shrink. Other countries, especially
+        in parts of Africa, still have higher fertility rates and younger populations.
       </p>
-    </div>
-    <div class="reveal">
-      <a href="https://ourworldindata.org/fertility-rate" target="_blank" class="source-link">
-        Visit Our World in Data →
-      </a>
-    </div>
-  </div>
+    </section>
 
-  <!-- FOOTER -->
+    <section>
+      <h2>Why Fertility Rates Are Falling</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Education</h3>
+          <p>More years in school often lead people to have children later in life.</p>
+        </div>
+
+        <div class="card">
+          <h3>Urbanization</h3>
+          <p>City life is usually more expensive, making large families less common.</p>
+        </div>
+
+        <div class="card">
+          <h3>Healthcare</h3>
+          <p>Better healthcare and family planning give families more control.</p>
+        </div>
+
+        <div class="card">
+          <h3>Economy</h3>
+          <p>Housing, jobs, and childcare costs influence family size decisions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Why It Matters</h2>
+      <p>
+        Fertility rates affect schools, jobs, healthcare systems, pensions, and the
+        future size of populations. Understanding fertility trends helps governments
+        and communities plan for the future.
+      </p>
+    </section>
+  </main>
+
   <footer>
-    <div class="footer-logo">Fertility <em>Trends</em></div>
-    <p>Data: Our World in Data · Global Change Data Lab · Charity No. 1186433</p>
-    <p>Built as a standalone HTML website</p>
+    <p>Simple Fertility Rate Website</p>
   </footer>
 
-  <script>
-    // Intersection Observer for reveal animations
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-
-          // Animate stat bars
-          const bar = e.target.querySelector('.stat-bar');
-          if (bar) {
-            setTimeout(() => {
-              bar.style.width = bar.dataset.width + '%';
-            }, 200);
-          }
-
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal, .stat-row, .timeline-item').forEach(el => io.observe(el));
-
-    // Stagger timeline items
-    document.querySelectorAll('.timeline-item').forEach((el, i) => {
-      el.style.transitionDelay = (i * 0.1) + 's';
-    });
-  </script>
-
+  <!-- Botpress Chatbot -->
   <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2026/06/06/07/20260606070158-DULPYYXP.js" defer></script>
+  <script src="https://files.bpcontent.cloud/2026/06/08/17/20260608170936-VUHVL0KU.js" defer></script>
 
 </body>
 </html>
