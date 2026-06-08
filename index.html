@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-    <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2026/06/06/07/20260606070158-DULPYYXP.js" defer></script>
-    
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fertility Trends Assistant</title>
@@ -31,7 +27,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE TEXTURE OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
@@ -41,7 +36,6 @@
       z-index: 0;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -84,7 +78,6 @@
 
     .nav-links a:hover { color: var(--accent); }
 
-    /* ── HERO ── */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -98,7 +91,6 @@
       overflow: hidden;
     }
 
-    /* big decorative circle */
     .hero::after {
       content: '';
       position: absolute;
@@ -200,7 +192,6 @@
       transform: translateY(-2px);
     }
 
-    /* ── SCROLL INDICATOR ── */
     .scroll-hint {
       position: absolute;
       bottom: 2.5rem;
@@ -230,7 +221,6 @@
       50% { opacity: 1; transform: scaleY(1.2); }
     }
 
-    /* ── STATS STRIP ── */
     .stats-strip {
       position: relative;
       z-index: 1;
@@ -263,7 +253,6 @@
 
     .stat-item strong em { color: var(--accent); font-style: normal; }
 
-    /* ── SECTION ── */
     section {
       position: relative;
       z-index: 1;
@@ -298,7 +287,6 @@
       max-width: 560px;
     }
 
-    /* ── CARDS ── */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -337,14 +325,12 @@
       color: var(--mid);
     }
 
-    /* ── DIVIDER ── */
     .divider {
       border: none;
       border-top: 1px solid var(--border);
       margin: 0 4rem;
     }
 
-    /* ── CHAT SECTION ── */
     .chat-section {
       background: var(--ink);
       color: var(--paper);
@@ -401,7 +387,6 @@
       50% { opacity:0.5; transform: scale(1.4); }
     }
 
-    /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 1;
@@ -424,10 +409,7 @@
 
     .footer-logo span { color: var(--accent); }
 
-    footer p {
-      font-size: 0.8rem;
-      color: var(--mid);
-    }
+    footer p { font-size: 0.8rem; color: var(--mid); }
 
     footer a {
       color: var(--mid);
@@ -438,7 +420,6 @@
 
     footer a:hover { color: var(--accent); }
 
-    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -455,7 +436,6 @@
       transform: none;
     }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
@@ -525,7 +505,6 @@
         trends across Brazil, India, China, and beyond.
       </p>
     </div>
-
     <div class="cards">
       <div class="card reveal">
         <div class="card-icon">📊</div>
@@ -562,7 +541,6 @@
         global living conditions are changing through open, publicly available data.
       </p>
     </div>
-
     <div class="cards" style="margin-top:2.5rem;">
       <div class="card reveal">
         <div class="card-icon">🇧🇷</div>
@@ -593,7 +571,7 @@
       The chatbot in the bottom-right corner is ready to help. Ask it anything —
       from "Why did China's fertility rate drop?" to "Compare India and Brazil after 1990."
     </p>
-    <button class="chat-launch-btn" onclick="document.querySelector('.bp-widget-web') && document.querySelector('.bp-widget-web').click()">
+    <button class="chat-launch-btn">
       <span class="chat-pulse"></span> Open the Assistant
     </button>
     <p style="margin-top:1.5rem; font-size:0.8rem; color:rgba(245,240,232,0.4); letter-spacing:0.05em;">
@@ -618,9 +596,12 @@
         }
       });
     }, { threshold: 0.15 });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
+
+  <!-- BOTPRESS CHATBOT — must be last, after page has fully loaded -->
+  <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2026/06/06/07/20260606070158-DULPYYXP.js"></script>
 
 </body>
 </html>
