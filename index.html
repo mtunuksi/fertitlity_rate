@@ -3,130 +3,142 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fertility Trends Assistant</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Fertility Trends — Brazil, India & China</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink:     #0e0e0e;
-      --paper:   #f5f0e8;
-      --accent:  #c0392b;
-      --mid:     #6b7280;
-      --card:    #ffffff;
-      --border:  #d6cfc3;
+      --bg:       #0a0a0a;
+      --surface:  #111111;
+      --border:   #1e1e1e;
+      --text:     #e8e2d9;
+      --muted:    #5a5550;
+      --accent:   #d4a847;
+      --accent2:  #7eb8a4;
+      --accent3:  #c06060;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
-      background-color: var(--paper);
-      color: var(--ink);
+      font-family: 'Syne', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    body::before {
+    /* ── GRAIN OVERLAY ── */
+    body::after {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
       pointer-events: none;
-      z-index: 0;
+      z-index: 9999;
     }
 
+    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(245,240,232,0.85);
-      backdrop-filter: blur(12px);
+      padding: 1.4rem 5vw;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
 
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-      color: var(--ink);
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text);
       text-decoration: none;
     }
 
-    .nav-logo span { color: var(--accent); }
+    .logo em { color: var(--accent); font-style: italic; }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
       list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--mid);
+      color: var(--muted);
       transition: color 0.2s;
     }
 
     .nav-links a:hover { color: var(--accent); }
 
+    /* ── HERO ── */
     .hero {
-      position: relative;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8rem 2rem 4rem;
-      z-index: 1;
-      overflow: hidden;
+      padding: 10rem 5vw 6rem;
+      gap: 4rem;
+      position: relative;
     }
 
-    .hero::after {
+    /* vertical rule */
+    .hero::before {
       content: '';
       position: absolute;
-      width: 700px; height: 700px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      animation: spin 60s linear infinite;
+      left: 50%;
+      top: 15%;
+      bottom: 15%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border), transparent);
     }
 
-    @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+    .hero-left { padding-right: 4rem; }
 
-    .hero-tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-eyebrow span {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: 0.3rem 0.9rem;
-      border-radius: 2px;
-      margin-bottom: 2rem;
-      animation: fadeUp 0.6s ease both;
+    }
+
+    .eyebrow-line {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -0.03em;
-      max-width: 900px;
-      animation: fadeUp 0.7s 0.1s ease both;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 strong {
+      font-weight: 600;
+      display: block;
     }
 
     .hero h1 em {
@@ -134,265 +146,399 @@
       color: var(--accent);
     }
 
-    .hero-sub {
-      margin-top: 1.8rem;
-      font-size: 1.1rem;
+    .hero-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
       font-weight: 300;
-      color: var(--mid);
-      max-width: 520px;
-      line-height: 1.7;
-      animation: fadeUp 0.7s 0.2s ease both;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 3rem;
     }
 
-    .hero-cta {
-      margin-top: 2.8rem;
+    .hero-actions {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
-      justify-content: center;
-      animation: fadeUp 0.7s 0.3s ease both;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.85rem 2rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 500;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: all 0.2s;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-
-    .btn-primary {
-      background: var(--ink);
-      color: var(--paper);
-      border: 2px solid var(--ink);
-    }
-
-    .btn-primary:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(192,57,43,0.25);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--ink);
-      border: 2px solid var(--border);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--ink);
-      transform: translateY(-2px);
-    }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.7rem;
+      padding: 0.8rem 1.8rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--mid);
-      animation: fadeUp 1s 0.8s ease both;
+      text-decoration: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.25s;
     }
 
-    .scroll-hint::after {
-      content: '';
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--mid), transparent);
-      animation: scrollPulse 1.5s ease-in-out infinite;
+    .btn-gold {
+      background: var(--accent);
+      color: #0a0a0a;
+      border: 1px solid var(--accent);
     }
 
-    @keyframes scrollPulse {
-      0%,100% { opacity: 0.3; transform: scaleY(1); }
-      50% { opacity: 1; transform: scaleY(1.2); }
+    .btn-gold:hover {
+      background: transparent;
+      color: var(--accent);
+      transform: translateY(-2px);
     }
 
-    .stats-strip {
-      position: relative;
-      z-index: 1;
-      background: var(--ink);
-      color: var(--paper);
-      padding: 3rem 4rem;
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    /* hero right: stats stack */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .stat-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-      text-align: center;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateX(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .stat-item strong {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 900;
-      color: var(--paper);
-      line-height: 1;
-    }
+    .stat-row:first-child { border-top: 1px solid var(--border); }
+    .stat-row.visible { opacity: 1; transform: none; }
 
-    .stat-item span {
-      margin-top: 0.4rem;
-      display: block;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
+    .stat-flag { font-size: 2rem; }
+
+    .stat-info { }
+    .stat-info .country {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(245,240,232,0.5);
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .stat-info .label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--text);
     }
 
-    .stat-item strong em { color: var(--accent); font-style: normal; }
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      line-height: 1;
+      text-align: right;
+    }
 
-    section {
-      position: relative;
-      z-index: 1;
-      padding: 6rem 4rem;
-      max-width: 1200px;
+    .stat-row:nth-child(1) .stat-number { color: var(--accent); }
+    .stat-row:nth-child(2) .stat-number { color: var(--accent2); }
+    .stat-row:nth-child(3) .stat-number { color: var(--accent3); }
+
+    /* bar underneath number */
+    .stat-bar-wrap {
+      grid-column: 1 / -1;
+      height: 2px;
+      background: var(--border);
+      border-radius: 1px;
+      margin-top: -1rem;
+      overflow: hidden;
+    }
+
+    .stat-bar {
+      height: 100%;
+      border-radius: 1px;
+      width: 0;
+      transition: width 1.2s ease;
+    }
+
+    .stat-row.visible .stat-bar { }
+    .stat-row:nth-child(1) .stat-bar { background: var(--accent); }
+    .stat-row:nth-child(2) .stat-bar { background: var(--accent2); }
+    .stat-row:nth-child(3) .stat-bar { background: var(--accent3); }
+
+    /* ── SECTION BASE ── */
+    .section {
+      padding: 8rem 5vw;
+      max-width: 1300px;
       margin: 0 auto;
     }
 
-    .section-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 4rem;
+      margin-bottom: 5rem;
+    }
+
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: -0.5rem;
+    }
+
+    .section-head-text {}
+
+    .section-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
     }
 
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      max-width: 600px;
-      margin-bottom: 1.5rem;
-    }
-
-    .section-body {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--mid);
-      max-width: 560px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2rem;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(14,14,14,0.08);
-    }
-
-    .card-icon {
-      font-size: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
       margin-bottom: 1rem;
     }
 
-    .card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
+    .section-title strong { font-weight: 600; }
+
+    .section-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    /* ── FULL-WIDTH DIVIDER ── */
+    .full-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── COUNTRY CARDS ── */
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .country-card {
+      background: var(--surface);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .country-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+
+    .country-card:nth-child(1)::before { background: var(--accent); }
+    .country-card:nth-child(2)::before { background: var(--accent2); }
+    .country-card:nth-child(3)::before { background: var(--accent3); }
+
+    .country-card:hover { background: #161616; }
+
+    .card-flag { font-size: 2.5rem; margin-bottom: 1.5rem; }
+
+    .card-country {
+      font-size: 0.65rem;
       font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .card-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .card-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .card-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .country-card:nth-child(1) .card-stat-num { color: var(--accent); }
+    .country-card:nth-child(2) .card-stat-num { color: var(--accent2); }
+    .country-card:nth-child(3) .card-stat-num { color: var(--accent3); }
+
+    .card-stat-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), var(--border));
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 3.5rem 3rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .timeline-item.visible { opacity: 1; transform: none; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -3rem;
+      top: 0.4rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-left: -3.5px;
+    }
+
+    .timeline-year {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
       margin-bottom: 0.6rem;
     }
 
-    .card p {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: var(--mid);
+    .timeline-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 560px;
     }
 
-    .divider {
-      border: none;
+    /* ── DATA SOURCE ── */
+    .source-band {
+      background: var(--surface);
       border-top: 1px solid var(--border);
-      margin: 0 4rem;
+      border-bottom: 1px solid var(--border);
+      padding: 4rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
     }
 
-    .chat-section {
-      background: var(--ink);
-      color: var(--paper);
-      padding: 6rem 4rem;
-      text-align: center;
+    .source-left { }
+    .source-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
     }
 
-    .chat-section .section-title {
-      color: var(--paper);
-      margin: 0 auto 1rem;
+    .source-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
     }
 
-    .chat-section .section-body {
-      color: rgba(245,240,232,0.6);
-      margin: 0 auto 2.5rem;
+    .source-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 500px;
     }
 
-    .chat-section .section-label { color: #e07b6a; }
-
-    .chat-launch-btn {
+    .source-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 1rem 2.5rem;
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 3px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      letter-spacing: 0.02em;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+      white-space: nowrap;
     }
 
-    .chat-launch-btn:hover {
-      background: #a93226;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(192,57,43,0.4);
-    }
+    .source-link:hover { border-color: var(--accent); }
 
-    .chat-pulse {
-      display: inline-block;
-      width: 8px; height: 8px;
-      background: #2ecc71;
-      border-radius: 50%;
-      margin-right: 2px;
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%,100% { opacity:1; transform: scale(1); }
-      50% { opacity:0.5; transform: scale(1.4); }
-    }
-
+    /* ── FOOTER ── */
     footer {
-      position: relative;
-      z-index: 1;
-      background: var(--paper);
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 4rem;
+      padding: 3rem 5vw;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -401,49 +547,43 @@
     }
 
     .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
+      font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem;
-      color: var(--ink);
+      font-weight: 600;
     }
 
-    .footer-logo span { color: var(--accent); }
+    .footer-logo em { color: var(--accent); font-style: italic; }
 
-    footer p { font-size: 0.8rem; color: var(--mid); }
-
-    footer a {
-      color: var(--mid);
-      text-decoration: none;
-      font-size: 0.8rem;
-      transition: color 0.2s;
+    footer p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
     }
 
-    footer a:hover { color: var(--accent); }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    /* ── REVEAL ── */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(24px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 8rem; }
+      .hero::before { display: none; }
+      .hero-left { padding-right: 0; }
+      .country-grid { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; gap: 1rem; }
+      .section-num { font-size: 3rem; }
+      nav { padding: 1rem 5vw; }
+      .nav-links { gap: 1.5rem; }
     }
 
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
+    @media (max-width: 600px) {
       .nav-links { display: none; }
-      section { padding: 4rem 1.5rem; }
-      .stats-strip { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; }
-      .chat-section { padding: 4rem 1.5rem; }
-      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
-      .divider { margin: 0 1.5rem; }
+      .hero h1 { font-size: 3rem; }
     }
   </style>
 </head>
@@ -451,157 +591,273 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">Fertility<span>AI</span></a>
+    <a href="#" class="logo">Fertility <em>Trends</em></a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#countries">Countries</a></li>
+      <li><a href="#history">History</a></li>
       <li><a href="#data">Data</a></li>
-      <li><a href="#chat">Ask the Bot</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <div class="hero">
-    <span class="hero-tag">Powered by AI</span>
-    <h1>Global Fertility<br/><em>Trends</em> Explorer</h1>
-    <p class="hero-sub">
-      Ask questions about fertility rate trends in Brazil, India, China,
-      and 190+ countries — powered by an intelligent assistant trained on
-      decades of demographic data.
-    </p>
-    <div class="hero-cta">
-      <a href="#chat" class="btn btn-primary">
-        <span class="chat-pulse"></span> Chat with the Bot
-      </a>
-      <a href="#about" class="btn btn-outline">Learn More</a>
-    </div>
-    <div class="scroll-hint">Scroll</div>
-  </div>
-
-  <!-- STATS STRIP -->
-  <div class="stats-strip">
-    <div class="stat-item">
-      <strong>1<em>.</em>6</strong>
-      <span>Brazil's fertility rate (2023)</span>
-    </div>
-    <div class="stat-item">
-      <strong>2<em>.</em>0</strong>
-      <span>India's fertility rate (2023)</span>
-    </div>
-    <div class="stat-item">
-      <strong>1<em>.</em>0</strong>
-      <span>China's fertility rate (2023)</span>
-    </div>
-  </div>
-
-  <!-- ABOUT SECTION -->
-  <section id="about">
-    <div class="reveal">
-      <p class="section-label">About this project</p>
-      <h2 class="section-title">Understanding global demographic shifts</h2>
-      <p class="section-body">
-        Fertility rates are one of the most consequential metrics in demography.
-        This platform combines historical data from Our World in Data with an
-        AI assistant to help researchers, students, and curious minds explore
-        trends across Brazil, India, China, and beyond.
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span>Global Demography — 2025</span>
+      </div>
+      <h1>
+        The Falling<br/>
+        <strong>Birth Rate</strong><br/>
+        <em>Crisis</em>
+      </h1>
+      <p class="hero-desc">
+        Three of the world's most populous nations — Brazil, India, and China —
+        have undergone dramatic demographic transformations over the past seven decades.
+        This is their story in data.
       </p>
-    </div>
-    <div class="cards">
-      <div class="card reveal">
-        <div class="card-icon">📊</div>
-        <h3>Historical Data</h3>
-        <p>Spanning over 70 years of fertility rate records sourced from
-           Our World in Data, covering 190+ countries worldwide.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🤖</div>
-        <h3>AI-Powered Insights</h3>
-        <p>Ask natural-language questions about trends, causes, comparisons,
-           and policy impacts — and get clear, contextual answers instantly.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🌍</div>
-        <h3>Global Coverage</h3>
-        <p>Deep focus on Brazil, India, and China — the world's three most
-           populous nations — with broad global context for comparison.</p>
+      <div class="hero-actions">
+        <a href="#countries" class="btn btn-gold">Explore Countries</a>
+        <a href="#data" class="btn btn-ghost">View Data Source</a>
       </div>
     </div>
-  </section>
 
-  <hr class="divider"/>
+    <div class="hero-right">
+      <div class="stat-row">
+        <div class="stat-flag">🇧🇷</div>
+        <div class="stat-info">
+          <div class="country">Brazil</div>
+          <div class="label">Fertility Rate, 2023</div>
+        </div>
+        <div class="stat-number">1.6</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar" data-width="27"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-flag">🇮🇳</div>
+        <div class="stat-info">
+          <div class="country">India</div>
+          <div class="label">Fertility Rate, 2023</div>
+        </div>
+        <div class="stat-number">2.0</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar" data-width="33"></div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-flag">🇨🇳</div>
+        <div class="stat-info">
+          <div class="country">China</div>
+          <div class="label">Fertility Rate, 2023</div>
+        </div>
+        <div class="stat-number">1.0</div>
+        <div class="stat-bar-wrap">
+          <div class="stat-bar" data-width="17"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <!-- DATA SECTION -->
-  <section id="data">
-    <div class="reveal">
-      <p class="section-label">The data</p>
-      <h2 class="section-title">Where does the data come from?</h2>
-      <p class="section-body">
-        All fertility data is sourced from <strong>Our World in Data</strong>,
+  <hr class="full-divider"/>
+
+  <!-- OVERVIEW SECTION -->
+  <div class="section" id="overview">
+    <div class="section-header reveal">
+      <div class="section-num">01</div>
+      <div class="section-head-text">
+        <div class="section-tag">Overview</div>
+        <h2 class="section-title">A world below <strong>replacement level</strong></h2>
+        <p class="section-body">
+          The replacement fertility rate — the level needed to maintain a stable population
+          without migration — is approximately 2.1 children per woman. All three nations
+          covered here have fallen at or below this threshold, signalling a profound
+          shift in global demographics with far-reaching economic and social consequences.
+        </p>
+      </div>
+    </div>
+
+    <div class="country-grid reveal">
+      <div class="country-card">
+        <div class="card-flag">🇧🇷</div>
+        <div class="card-country">Brazil</div>
+        <div class="card-title">From 6.2 to 1.6 in sixty years</div>
+        <p class="card-body">
+          Brazil achieved one of Latin America's fastest demographic transitions,
+          driven by urbanisation, women entering the workforce, and broad access
+          to family planning across its vast territory.
+        </p>
+        <div class="card-stat">
+          <span class="card-stat-num">1.6</span>
+          <span class="card-stat-label">births per<br/>woman (2023)</span>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="card-flag">🇮🇳</div>
+        <div class="card-country">India</div>
+        <div class="card-title">Crossing the replacement threshold</div>
+        <p class="card-body">
+          India's fertility rate has fallen below 2.1 for the first time, a milestone
+          once thought decades away. Regional disparities remain stark — southern
+          states lead the decline while northern states lag behind.
+        </p>
+        <div class="card-stat">
+          <span class="card-stat-num">2.0</span>
+          <span class="card-stat-label">births per<br/>woman (2023)</span>
+        </div>
+      </div>
+      <div class="country-card">
+        <div class="card-flag">🇨🇳</div>
+        <div class="card-country">China</div>
+        <div class="card-title">The One-Child Policy's long shadow</div>
+        <p class="card-body">
+          China's rate is now among the lowest on the planet, a direct consequence
+          of the One-Child Policy enforced from 1980 to 2015 and structural
+          economic pressures that persist even after its abolition.
+        </p>
+        <div class="card-stat">
+          <span class="card-stat-num">1.0</span>
+          <span class="card-stat-label">births per<br/>woman (2023)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="full-divider"/>
+
+  <!-- HISTORY SECTION -->
+  <div class="section" id="history">
+    <div class="section-header reveal">
+      <div class="section-num">02</div>
+      <div class="section-head-text">
+        <div class="section-tag">Historical Context</div>
+        <h2 class="section-title">Key moments in <strong>demographic change</strong></h2>
+        <p class="section-body">
+          The decline in fertility rates across Brazil, India, and China was not gradual —
+          it was shaped by deliberate policy decisions, economic shocks,
+          and cultural transformations that unfolded over decades.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1960s</div>
+        <div class="timeline-title">Peak fertility across all three nations</div>
+        <p class="timeline-body">
+          Brazil, India, and China all recorded fertility rates above 5.5 children
+          per woman during this decade. Post-war population growth was seen as
+          a sign of national vitality in many developing economies.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1975 — Brazil</div>
+        <div class="timeline-title">Urbanisation accelerates the transition</div>
+        <p class="timeline-body">
+          Brazil's rapid urbanisation through the 1970s fundamentally changed
+          family structures. City living reduced the economic value of large
+          families, and access to contraception expanded significantly.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1980 — China</div>
+        <div class="timeline-title">The One-Child Policy is enacted</div>
+        <p class="timeline-body">
+          China's government introduced strict birth limits as part of its
+          modernisation programme. Families were restricted to one child in urban
+          areas, enforced through fines, loss of benefits, and in some cases coercion.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">1990s — India</div>
+        <div class="timeline-title">Economic liberalisation changes the landscape</div>
+        <p class="timeline-body">
+          India's 1991 economic reforms opened the country to global markets,
+          accelerating urbanisation and dramatically improving female literacy rates —
+          two of the strongest predictors of fertility decline.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2015 — China</div>
+        <div class="timeline-title">The One-Child Policy is abolished</div>
+        <p class="timeline-body">
+          Facing a rapidly ageing population and shrinking workforce, China
+          abolished the One-Child Policy in 2015 and later introduced a
+          three-child policy in 2021. Fertility rates have not recovered.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2023 — All Three</div>
+        <div class="timeline-title">All three nations below replacement level</div>
+        <p class="timeline-body">
+          For the first time in recorded history, Brazil, India, and China
+          simultaneously record fertility rates at or below the replacement
+          threshold of 2.1 — a landmark moment in global demographic history.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA SOURCE BAND -->
+  <div class="source-band" id="data">
+    <div class="source-left reveal">
+      <div class="source-tag">Data Source</div>
+      <div class="source-name">Our World in Data</div>
+      <p class="source-desc">
+        All fertility statistics on this site are sourced from Our World in Data,
         a project of the Global Change Data Lab — a registered UK non-profit
-        (Charity No. 1186433). Their mission is to advance education on how
-        global living conditions are changing through open, publicly available data.
+        (Charity No. 1186433) dedicated to advancing education through open,
+        publicly available global data.
       </p>
     </div>
-    <div class="cards" style="margin-top:2.5rem;">
-      <div class="card reveal">
-        <div class="card-icon">🇧🇷</div>
-        <h3>Brazil</h3>
-        <p>From a fertility rate of over 6 in the 1960s to under 1.7 today —
-           one of the fastest demographic transitions in Latin America.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🇮🇳</div>
-        <h3>India</h3>
-        <p>India has crossed the replacement threshold, with its rate declining
-           from 5.9 in 1960 to approximately 2.0 in 2023.</p>
-      </div>
-      <div class="card reveal">
-        <div class="card-icon">🇨🇳</div>
-        <h3>China</h3>
-        <p>Dramatically shaped by the One Child Policy, China now faces one
-           of the lowest fertility rates globally at around 1.0.</p>
-      </div>
+    <div class="reveal">
+      <a href="https://ourworldindata.org/fertility-rate" target="_blank" class="source-link">
+        Visit Our World in Data →
+      </a>
     </div>
-  </section>
-
-  <!-- CHAT SECTION -->
-  <div class="chat-section" id="chat">
-    <p class="section-label">AI Assistant</p>
-    <h2 class="section-title">Have a question about fertility trends?</h2>
-    <p class="section-body">
-      The chatbot in the bottom-right corner is ready to help. Ask it anything —
-      from "Why did China's fertility rate drop?" to "Compare India and Brazil after 1990."
-    </p>
-    <button class="chat-launch-btn">
-      <span class="chat-pulse"></span> Open the Assistant
-    </button>
-    <p style="margin-top:1.5rem; font-size:0.8rem; color:rgba(245,240,232,0.4); letter-spacing:0.05em;">
-      Look for the chat bubble in the bottom-right corner of the screen
-    </p>
   </div>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">Fertility<span>AI</span></div>
-    <p>Data source: <a href="https://ourworldindata.org" target="_blank">Our World in Data</a> · Global Change Data Lab</p>
-    <p>Built with ♥ using Quarto &amp; Botpress</p>
+    <div class="footer-logo">Fertility <em>Trends</em></div>
+    <p>Data: Our World in Data · Global Change Data Lab · Charity No. 1186433</p>
+    <p>Built as a standalone HTML website</p>
   </footer>
 
-  <!-- SCROLL REVEAL -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
+    // Intersection Observer for reveal animations
+    const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
-          observer.unobserve(e.target);
+
+          // Animate stat bars
+          const bar = e.target.querySelector('.stat-bar');
+          if (bar) {
+            setTimeout(() => {
+              bar.style.width = bar.dataset.width + '%';
+            }, 200);
+          }
+
+          io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+    }, { threshold: 0.12 });
 
-  <!-- BOTPRESS CHATBOT — must be last, after page has fully loaded -->
-  <script src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2026/06/06/07/20260606070158-DULPYYXP.js"></script>
+    document.querySelectorAll('.reveal, .stat-row, .timeline-item').forEach(el => io.observe(el));
+
+    // Stagger timeline items
+    document.querySelectorAll('.timeline-item').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.1) + 's';
+    });
+  </script>
 
 </body>
 </html>
